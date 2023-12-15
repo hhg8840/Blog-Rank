@@ -8,7 +8,7 @@ export const getSearchedResult = async (data) => {
 
   for (const [index, ele] of keywordArray.entries()) {
     // 개발
-    /* await axios({
+    await axios({
       url: `/search.naver?where=view&query=${encodeURIComponent(ele)}&qvt=0`,
       method: "GET",
     })
@@ -23,29 +23,29 @@ export const getSearchedResult = async (data) => {
       })
       .catch((err) => {
         console.log(err);
-      }); */
+      });
 
     // 배포
-    const url = `https://search.naver.com/search.naver?where=view&query=${encodeURIComponent(
-      ele
-    )}&qvt=0`;
-    await axios({
-      url: "/api/getData",
-      method: "POST",
-      data: { url },
-    })
-      .then((res) => {
-        const $ = cheerio.load(res.data);
-        const findBlog = $(`a[href=https://blog.naver.com/${blogName}]`);
-        const parentLI = $(findBlog).closest("li.bx");
-        const rank = parentLI.attr("data-cr-rank");
-        const title = parentLI.find("a.title_link").text();
-        const date = parentLI.find("span.sub").text();
-        result[index] = { keyword: ele, rank: rank, title: title, date: date };
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // const url = `https://search.naver.com/search.naver?where=view&query=${encodeURIComponent(
+    //   ele
+    // )}&qvt=0`;
+    // await axios({
+    //   url: "/api/getData",
+    //   method: "POST",
+    //   data: { url },
+    // })
+    //   .then((res) => {
+    //     const $ = cheerio.load(res.data);
+    //     const findBlog = $(`a[href=https://blog.naver.com/${blogName}]`);
+    //     const parentLI = $(findBlog).closest("li.bx");
+    //     const rank = parentLI.attr("data-cr-rank");
+    //     const title = parentLI.find("a.title_link").text();
+    //     const date = parentLI.find("span.sub").text();
+    //     result[index] = { keyword: ele, rank: rank, title: title, date: date };
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
   return result;
 };
