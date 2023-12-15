@@ -27,7 +27,7 @@ export const getSearchedResult = async (data) => {
       });*/
 
     // 배포
-    const url = `https://m.search.naver.com/search.naver?where=view&query=${encodeURIComponent(
+    const url = `https://search.naver.com/search.naver?where=view&query=${encodeURIComponent(
       ele
     )}&qvt=0`;
     await axios({

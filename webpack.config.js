@@ -6,7 +6,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/search.naver": {
-        target: "https://m.search.naver.com",
+        target: "https://search.naver.com",
         changeOrigin: true,
       },
     },
